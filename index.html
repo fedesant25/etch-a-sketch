@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch A Sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<button>Try Again</button>
+
+<div id="container"></div>
+
+
+<script>
+    //Original Grid Function
+    for (let i=1; i <= 256; i ++) {
+     const board = document.createElement ("div")
+     board.className = "square"
+     document.getElementById("container").appendChild(board)
+    }
+
+    //Coloring function
+    const square = document.querySelectorAll(".square")
+    square.forEach(square => {
+        square.addEventListener("mouseover", (e) => {
+             e.target.style.backgroundColor = "orange";
+        })
+    })
+
+    const btn = document.querySelector("button")
+    
+    btn.addEventListener('click', (e) => {
+        const gridBox = prompt ("how many boxes would you like")
+
+        if (gridBox < 100 && gridBox % 2 === 0){ //GridBoxes should be less than 100 as per instructions and divisible by 2 so that we can have an even square
+            
+            //Remove old grid
+            document.getElementById("container").innerHTML = "";; 
+            
+            //New Grid Function
+            for (let i=1; i <= gridBox * gridBox; i ++) {
+            const board1 = document.createElement ("div") 
+            board1.className = "square1" // to differentiate from previous classes the names are diff
+            board1.style.flex = `0 0 calc(100% / ${gridBox})`; // inline CSS style same as before as it is conditional: since the number of the boxes is conditional we use the variable gridBoxes which is the number that the user will enter
+            board1.style.height = `calc(100% / ${gridBox})`;
+            board1.style.boxSizing = "border-box";
+            board1.style.border = "0.5px dotted grey";
+            document.getElementById("container").appendChild(board1)
+            }
+
+            //Coloring function w new names
+            const square1 = document.querySelectorAll(".square1")
+            square1.forEach(square1 => {
+            square1.addEventListener("mouseover", (e) => {
+            e.target.style.backgroundColor = "orange";
+        })
+    })
+
+
+        } else {alert ("the number must be multiple of 2 & less than 100")}
+    })
+
+</script>
+</body>
+</html>
